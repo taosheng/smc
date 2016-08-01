@@ -36,11 +36,12 @@ def grepUser(cuser,topic,params={}):
         bucket.upsert(oneUser['id'],oneUser)
 
 
-def grepPost(cuser,params={}):
+def grepPost(cpost,topic,params={}):
     params['access_token'] = access_token
-    oneUser = getResponse('/'+cuser, params)
-    print(oneUser)
-    bucket.upsert(oneUser['id'],oneUser)
+    onePost = getResponse('/'+cpost, params)
+    onePost['topic'] = topic
+    bucket.upsert(onePost['id'],onePost)
+    return onePost
 
 if __name__ == '__main__':
 
@@ -72,11 +73,12 @@ if __name__ == '__main__':
             time.sleep(random.randint(1, 3))
             print(post['id']) 
             params={'fields':'id,from,message'}
-            postDetail = getResponse('/'+post['id'],params)
+            #postDetail = getResponse('/'+post['id'],params)
+            postDetail = grepPost(post['id'], grepValue, params )
             if ('message' in postDetail) and (len(postDetail['message']) <= 30) :
                 print(postDetail)
             else:
-                print("message is too long [skip print].."+ str(postDetail['from']))
+                print("[skip print].."+ str(postDetail['from']))
             cuser = postDetail['from']['id']
             if handle_user_list.count(cuser) == 0:
                 handle_user_list.append(cuser)
