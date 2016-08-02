@@ -1,16 +1,27 @@
 # smc
 
+License: dougchen@talent-service.com
 
-* Social Media Chain
-** A Data pipe from source to any possibile destination
+## Social Media Chain
+ A Data pipe from source to any possibile destination
 
-** POC
-    (1)  grep keywords from fb 
-       (1.1) to couchbase
-       (1.1) to elasticsearch (TODO)
+## POC
+### Environment setting
+> ubuntu 14.04 LTS
+> couchbase
+> neo4j
+> python3
+> java8
+> git
+
+###  grep keywords from fb 
+> 1. to couchbase
+> 2. to elasticsearch (TODO)
       
-    (2) from nosql to machine learnning streamming (TODO)
-    (3) from nosql to graphic 
-       (3.1) neo4j
-       (3.2) Kibana (TODO)
+### from nosql to machine learnning streamming (TODO)
+### from nosql to graphic 
+> 1. neo4j
+> 2. Kibana (TODO)
 
+
+   
