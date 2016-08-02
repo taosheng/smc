@@ -7,21 +7,21 @@ License: dougchen@talent-service.com
 
 ## POC
 ### Environment setting
-> ubuntu 14.04 LTS
-> couchbase
-> neo4j
-> python3
-> java8
-> git
+* ubuntu 14.04 LTS
+* couchbase
+* neo4j
+* python3
+* java8
+* git
 
 ###  grep keywords from fb 
-> 1. to couchbase
-> 2. to elasticsearch (TODO)
+* 1. to couchbase
+* 2. to elasticsearch (DOING...)
       
 ### from nosql to machine learnning streamming (TODO)
 ### from nosql to graphic 
-> 1. neo4j
-> 2. Kibana (TODO)
+* 1. neo4j
+* 2. Kibana (TODO)
 
 
    
