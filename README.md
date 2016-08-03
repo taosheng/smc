@@ -15,8 +15,8 @@ License: dougchen@talent-service.com
 * git
 
 ###  grep keywords from fb 
-* 1. to couchbase
-* 2. to elasticsearch (DOING...)
+* 1. to couchbase (fbgrep.py)
+* 2. to elasticsearch (fbgrep_es.py)
       
 ### from nosql to machine learnning streamming (TODO)
 ### from nosql to graphic 
