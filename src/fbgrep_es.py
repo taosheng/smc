@@ -3,6 +3,7 @@
 
 
 from elasticsearch import Elasticsearch
+from simple_sentiment import Sentiment
 import json
 import requests
 import random
@@ -11,6 +12,7 @@ import time
 
 es = Elasticsearch()
 access_token = ''
+sent = Sentiment("subjclueslen1-HLTEMNLP05.tff")
 
 
 def hasUser(cuser,indexTopic):
@@ -47,6 +49,12 @@ def grepPost(cpost,topic,params={}):
     onePost = getResponse('/'+cpost, params)
     onePost['topic'] = topic
     indexTopic = "topic-"+topic
+    nweight = 0 
+    if 'message' in onePost:
+        nweight = sent.weight_by_string(onePost['message'])
+        print("simple sentiment---> :"+str(nweight)) 
+
+    onePost['sentiment'] = nweight
     res = es.create(index=indexTopic, doc_type='fbmsg',  body=onePost)
     es.indices.refresh(index=indexTopic)
     return onePost
@@ -83,6 +91,7 @@ if __name__ == '__main__':
             params={'fields':'id,from,message'}
             #postDetail = getResponse('/'+post['id'],params)
             postDetail = grepPost(post['id'], grepValue, params )
+
             if ('message' in postDetail) and (len(postDetail['message']) <= 30) :
                 print(postDetail)
             else:
