@@ -17,6 +17,7 @@ License: dougchen@talent-service.com
 ###  grep keywords from fb 
 * 1. to couchbase (fbgrep.py)
 * 2. to elasticsearch (fbgrep_es.py)
+* 3. add sentiment (simple weight for positive or negitave)
       
 ### from nosql to machine learnning streamming (TODO)
 ### from nosql to graphic 
