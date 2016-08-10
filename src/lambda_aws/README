@@ -1,0 +1,9 @@
+
+
+(1) it seems AWS lambda support only python2.7 at this moment
+   (1.1) pip install requests  -t /root/smc/src/lambda_aws <requires requests
+   (1.2) json seems default supported in 2.7?
+(2) this example will use lambda to get basic fb user informaiton by fb userid
+
+(3) bind AWS API Gateway with lambda
+
