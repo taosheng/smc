@@ -17,6 +17,8 @@ access_token = ''
 def getResponse(path, params={}):
     params['access_token'] = access_token
     r = requests.get('https://graph.facebook.com/v2.6/'+path,params=params)
+    #print(r)
+    #print(r.text)
     return json.loads(r.text)
 
 def grepUser(cuser,topic,params={}):
@@ -55,14 +57,15 @@ if __name__ == '__main__':
 #    app_id = '397433603789585'
 
     r = requests.get('https://graph.facebook.com/oauth/access_token?grant_type=client_credentials&client_id='+app_id+'&client_secret='+client_secret)
-    print(r.text)
     access_token = r.text.split('=')[1]
     print(access_token)
     params_user={'fields':'id,about,bio,name,link'}
-    print("====== handle all user =======")
     
     #user_token = 'EAAPgREs0wtgBAJ2MmLu4RvfnZBsKZAhyZB1yjUgtkDJcNuZBGzXHdwcWn7HgbtZBPfW9ES9zcWVFLOWKCxZAhyqhs1skclGpWyLRMvpZCjxE9MEjZAjPDDDZAPZAhlFp2wMTRH8rFwxNPAF6mNR5THhveLRlzoKPIw2KZAFMfCaiUJ2jUi7CD9VXRHR'
     r = getResponse('search',params={'access_token':access_token,'q':grepValue, 'type':'page'})
+    print("---- search result ----")
+    print(r)
+    print("---- search result end ----")
     handle_user_list=[]
     for item in r['data']:
         print(item)

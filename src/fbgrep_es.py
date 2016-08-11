@@ -24,6 +24,10 @@ def hasUser(cuser,indexTopic):
     else:
         return True
 
+def getNextPage(p, params):
+    r = requests.get(p,params=params)
+    return json.loads(r.text)
+
 def getResponse(path, params={}):
     params['access_token'] = access_token
     r = requests.get('https://graph.facebook.com/v2.6/'+path,params=params)
@@ -75,12 +79,29 @@ if __name__ == '__main__':
     access_token = r.text.split('=')[1]
     print(access_token)
     params_user={'fields':'id,about,bio,name,link'}
-    print("====== handle all user =======")
     
     #user_token = 'EAAPgREs0wtgBAJ2MmLu4RvfnZBsKZAhyZB1yjUgtkDJcNuZBGzXHdwcWn7HgbtZBPfW9ES9zcWVFLOWKCxZAhyqhs1skclGpWyLRMvpZCjxE9MEjZAjPDDDZAPZAhlFp2wMTRH8rFwxNPAF6mNR5THhveLRlzoKPIw2KZAFMfCaiUJ2jUi7CD9VXRHR'
     r = getResponse('search',params={'access_token':access_token,'q':grepValue, 'type':'page'})
+
+    toProcessData = r['data']
+    
+    print(" search page result --- ")
+    print(r)
+    print("total pages")
+    print(len(toProcessData))
+    print(" start paging ")
+    while('paging' in r and 'next' in r['paging']):
+       r = getNextPage(r['paging']['next'], params={'access_token':access_token}) 
+       toProcessData.extend(r['data'])
+
+    print(" ------- ")
+    print("total pages list")
+    for d in toProcessData:
+        print(d)
+    print(len(toProcessData))
+
     handle_user_list=[]
-    for item in r['data']:
+    for item in toProcessData:
         print(item)
         page_id = item['id']
         pager = getResponse("/"+page_id+"/posts")
@@ -119,6 +140,5 @@ if __name__ == '__main__':
 #    for u in handle_user_list:
 #        grepUser(u,grepValue,params_user)
        
-
 
 
