@@ -34,7 +34,7 @@ def getResponse(path, params={}):
     return json.loads(r.text)
 
 def grepUser(cuser,topic,params={}):
-    indexTopic = "topic-"+topic
+    indexTopic = "topic-"+topic.replace(" ","")
     params['access_token'] = access_token
     oneUser = getResponse('/'+cuser, params)
     if hasUser(cuser, indexTopic):
@@ -52,7 +52,7 @@ def grepPost(cpost,topic,params={}):
     params['access_token'] = access_token
     onePost = getResponse('/'+cpost, params)
     onePost['topic'] = topic
-    indexTopic = "topic-"+topic
+    indexTopic = "topic-"+topic.replace(" ","")
     nweight = 0 
     if 'message' in onePost:
         nweight = sent.weight_by_string(onePost['message'])
